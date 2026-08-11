@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Weekly Workout Plan — 5 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Reem+Kufi:wght@400;500;600;700&family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0d0f;
+    --bg-2:#15151a;
+    --ink:#f5f1e8;
+    --ink-dim:#9a958a;
+    --accent:#ff4d2d;
+    --accent-2:#ffb547;
+    --line:rgba(245,241,232,0.08);
+    --card:#17171c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:82px}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Tajawal',sans-serif;overflow-x:hidden}
+  body{
+    background-image:
+      radial-gradient(ellipse at top right, rgba(255,77,45,0.12), transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(255,181,71,0.08), transparent 60%);
+    min-height:100vh;
+    line-height:1.6;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity:.04;pointer-events:none;z-index:1;mix-blend-mode:overlay;
+  }
+
+  .hero{position:relative;padding:80px 5vw 60px;border-bottom:1px solid var(--line);overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+  .badge{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:8px 16px;border:1px solid var(--line);border-radius:100px;
+    font-size:13px;color:var(--ink-dim);margin-bottom:30px;background:rgba(255,255,255,0.02);
+  }
+  .badge-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+
+  h1.title{
+    font-family:'Anton',sans-serif;font-size:clamp(56px,11vw,160px);
+    font-weight:400;line-height:.92;letter-spacing:-.01em;text-transform:uppercase;
+  }
+  h1 .accent{color:var(--accent);font-style:italic;display:inline-block}
+  .subtitle{margin-top:24px;font-size:clamp(15px,1.6vw,18px);color:var(--ink-dim);max-width:520px}
+  .stats{display:flex;gap:30px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:24px;margin-top:30px}
+  .stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--accent-2);line-height:1}
+  .stat-label{font-size:12px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.15em;margin-top:6px}
+  .hero-side{font-family:'Bebas Neue',sans-serif;writing-mode:vertical-rl;font-size:14px;letter-spacing:.3em;color:var(--ink-dim);align-self:start}
+
+  .nav-days{
+    position:sticky;top:0;z-index:50;
+    background:rgba(13,13,15,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--line);padding:14px 5vw;
+  }
+  .nav-inner{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;max-width:1500px;margin:auto}
+  .nav-inner::-webkit-scrollbar{display:none}
+  .day-pill{
+    flex-shrink:0;padding:10px 18px;border:1px solid var(--line);border-radius:100px;
+    color:var(--ink);text-decoration:none;font-size:13px;font-weight:500;
+    transition:all .25s ease;display:flex;align-items:center;gap:8px;white-space:nowrap;
+    font-family:'Bebas Neue',sans-serif;letter-spacing:.1em;
+  }
+  .day-pill:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .day-pill.is-active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .day-pill .pill-dot{width:10px;height:10px;border-radius:2px}
+
+  .day-section{padding:80px 5vw;border-bottom:1px solid var(--line);position:relative;scroll-margin-top:76px}
+  .day-header{display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:center;margin-bottom:50px}
+  .day-num{font-family:'Anton',sans-serif;font-size:clamp(80px,12vw,180px);line-height:.85;letter-spacing:-.02em}
+  .day-info h2{font-family:'Anton',sans-serif;font-size:clamp(28px,4.5vw,52px);font-weight:400;line-height:1;text-transform:uppercase;letter-spacing:-.005em}
+  .day-info .day-arabic{font-family:'Reem Kufi',sans-serif;font-size:clamp(15px,1.8vw,20px);color:var(--ink-dim);margin-top:8px;font-weight:500}
+  .day-tag{
+    padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;
+    background:var(--accent);color:var(--bg);text-transform:uppercase;letter-spacing:.1em;
+    align-self:start;font-family:'Bebas Neue',sans-serif;
+  }
+
+  .day-1 .day-num{color:#ff4d2d}.day-1 .day-tag{background:#ff4d2d;color:var(--bg)}
+  .day-2 .day-num{color:#5ddb87}.day-2 .day-tag{background:#5ddb87;color:var(--bg)}
+  .day-3 .day-num{color:#4dabff}.day-3 .day-tag{background:#4dabff;color:var(--bg)}
+  .day-4 .day-num{color:#c084fc}.day-4 .day-tag{background:#c084fc;color:var(--bg)}
+  .day-5 .day-num{color:#ffb547}.day-5 .day-tag{background:#ffb547;color:var(--bg)}
+
+  .exercises{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+  .ex-card{
+    background:var(--card);border:1px solid var(--line);border-radius:8px;
+    overflow:hidden;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease,opacity .35s ease;display:flex;flex-direction:column;
+    box-shadow:0 10px 24px rgba(0,0,0,.12);
+  }
+  .ex-card:hover{transform:translateY(-3px);border-color:rgba(245,241,232,0.18);box-shadow:0 16px 32px rgba(0,0,0,.22)}
+  .reveal-ready .ex-card{opacity:0;transform:translateY(14px)}
+  .reveal-ready .ex-card.is-visible{opacity:1;transform:translateY(0)}
+  .reveal-ready .ex-card.is-visible:hover{transform:translateY(-3px)}
+
+  .ex-thumb{
+    aspect-ratio:16/10;position:relative;
+    background:linear-gradient(135deg, #1c1c24, #15151a);
+    overflow:hidden;display:block;text-decoration:none;
+  }
+  .ex-thumb svg.figure{
+    width:100%;height:100%;display:block;
+  }
+  .ex-thumb::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 40%, rgba(255,77,45,.08), transparent 60%);
+    pointer-events:none;
+  }
+  .ex-play{
+    position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.55),transparent 50%);
+    display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s ease;
+  }
+  .ex-thumb:hover .ex-play{opacity:1}
+  .ex-play-circle{
+    width:64px;height:64px;border-radius:50%;background:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 30px rgba(255,77,45,.5);
+  }
+  .ex-play-circle svg{width:24px;height:24px;fill:white;margin-right:-3px}
+  .video-badge{
+    position:absolute;top:12px;left:12px;
+    background:rgba(0,0,0,.75);backdrop-filter:blur(8px);
+    color:white;font-size:10px;letter-spacing:.15em;
+    padding:5px 10px;border-radius:6px;font-family:'Bebas Neue',sans-serif;
+    display:flex;align-items:center;gap:5px;z-index:2;
+  }
+  .video-badge::before{content:"▶";font-size:8px;color:var(--accent)}
+  .muscle-tag{
+    position:absolute;bottom:12px;right:12px;z-index:2;
+    background:rgba(255,255,255,.08);backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.1);
+    color:white;font-size:10px;letter-spacing:.1em;
+    padding:5px 10px;border-radius:6px;font-family:'Bebas Neue',sans-serif;
+  }
+
+  .ex-meta{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column}
+  .ex-name-en{
+    font-family:'Anton',sans-serif;font-size:24px;font-weight:400;
+    line-height:1.1;text-transform:uppercase;letter-spacing:.005em;
+    direction:ltr;text-align:right;
+  }
+  .ex-name-ar{font-family:'Reem Kufi',sans-serif;font-size:13px;color:var(--ink-dim);margin-top:4px;font-weight:500}
+  .ex-reps{
+    margin-top:14px;padding:10px 14px;
+    background:rgba(255,255,255,0.03);border-radius:6px;
+    font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.05em;
+    color:var(--accent-2);display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+  }
+  .ex-reps::before{content:"";width:6px;height:6px;background:var(--accent-2);border-radius:50%}
+  .ex-benefit{
+    margin-top:14px;font-size:12.5px;color:var(--ink-dim);line-height:1.6;
+    border-top:1px dashed var(--line);padding-top:12px;
+  }
+  .ex-benefit strong{color:var(--ink);font-weight:700}
+
+  .complete-btn{
+    width:100%;min-height:44px;margin-top:8px;padding:11px 14px;
+    border:1px solid rgba(245,241,232,.14);border-radius:8px;
+    background:rgba(255,255,255,.04);color:var(--ink);
+    font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease;
+  }
+  .complete-btn:hover{background:rgba(255,255,255,.09);border-color:rgba(245,241,232,.28)}
+  .complete-btn:focus-visible{outline:3px solid rgba(255,181,71,.35);outline-offset:2px}
+  .complete-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .rest-btn{
+    width:100%;min-height:44px;margin-top:auto;padding:11px 14px;border:1px solid rgba(255,181,71,.28);
+    border-radius:8px;background:rgba(255,181,71,.08);color:var(--accent-2);
+    font:700 14px 'Tajawal',sans-serif;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;
+  }
+  .rest-btn:hover{background:rgba(255,181,71,.15);border-color:rgba(255,181,71,.5)}
+  .rest-btn:focus-visible{outline:3px solid rgba(255,181,71,.35);outline-offset:2px}
+  .rest-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .rest-note{
+    margin:10px 0 12px;padding:10px 12px;border-right:3px solid var(--accent-2);border-radius:4px;
+    background:rgba(255,181,71,.055);color:var(--ink-dim);font-size:12px;line-height:1.65;
+  }
+  .rest-note strong{color:var(--accent-2)}
+  .details-btn{
+    width:100%;min-height:42px;margin:0 0 8px;padding:10px 14px;border:1px solid rgba(245,241,232,.13);
+    border-radius:8px;background:transparent;color:var(--ink);font:700 13px 'Tajawal',sans-serif;
+    display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;
+  }
+  .details-btn:hover{background:rgba(255,255,255,.06)}
+  .details-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .ex-card.is-complete{border-color:rgba(93,219,135,.5);background:rgba(93,219,135,.055)}
+  .ex-card.is-complete .ex-thumb{filter:saturate(.72)}
+  .ex-card.is-complete .complete-btn{background:#5ddb87;border-color:#5ddb87;color:#0d0d0f}
+  .day-progress{margin-top:14px;max-width:240px}
+  .day-progress-copy{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink-dim);font-size:12px;font-weight:700}
+  .day-progress-copy strong{color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em}
+  .day-progress-track{height:5px;margin-top:7px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+  .day-progress-fill{display:block;width:0;height:100%;background:#5ddb87;border-radius:inherit;transition:width .3s ease}
+
+  .rest-timer{
+    position:fixed;left:50%;bottom:20px;z-index:100;
+    width:min(430px,calc(100vw - 24px));padding:18px;
+    background:rgba(23,23,28,.97);border:1px solid rgba(245,241,232,.16);border-radius:8px;
+    box-shadow:0 20px 55px rgba(0,0,0,.55);backdrop-filter:blur(18px);
+    transform:translate(-50%,calc(100% + 40px));opacity:0;visibility:hidden;
+    transition:transform .3s ease,opacity .3s ease,visibility .3s ease;
+  }
+  .rest-timer.is-open{transform:translate(-50%,0);opacity:1;visibility:visible}
+  .rest-timer-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .rest-timer-label{color:var(--ink-dim);font-size:12px;font-weight:700}
+  .rest-timer-time{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:var(--accent-2);direction:ltr}
+  .rest-timer-close{
+    width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.06);color:var(--ink);
+    font-size:24px;line-height:1;cursor:pointer;
+  }
+  .rest-timer-track{height:5px;margin:14px 0;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+  .rest-timer-fill{display:block;width:100%;height:100%;background:var(--accent-2);transition:width 1s linear}
+  .rest-timer-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .timer-preset,.timer-toggle{
+    min-height:40px;border:1px solid rgba(245,241,232,.13);border-radius:8px;
+    background:rgba(255,255,255,.04);color:var(--ink);font:700 13px 'Tajawal',sans-serif;cursor:pointer;
+  }
+  .timer-preset.is-active{background:var(--accent-2);border-color:var(--accent-2);color:#0d0d0f}
+  .timer-toggle{width:100%;margin-top:8px}
+  .timer-toggle:hover,.rest-timer-close:hover{background:rgba(255,255,255,.11)}
+  .rest-timer.is-finished .rest-timer-time{color:#5ddb87}
+  .rest-timer.is-finished .rest-timer-fill{background:#5ddb87}
+
+  .exercise-dialog{
+    position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:18px;
+    background:rgba(0,0,0,.72);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease;
+  }
+  .exercise-dialog.is-open{opacity:1;visibility:visible}
+  .exercise-dialog-panel{
+    width:min(620px,100%);max-height:min(760px,calc(100vh - 36px));overflow-y:auto;
+    background:var(--card);border:1px solid rgba(245,241,232,.16);border-radius:8px;padding:22px;
+    box-shadow:0 25px 70px rgba(0,0,0,.6);transform:translateY(16px);transition:transform .2s ease;
+  }
+  .exercise-dialog.is-open .exercise-dialog-panel{transform:translateY(0)}
+  .dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px}
+  .dialog-eyebrow{color:var(--accent-2);font-size:11px;font-weight:700}
+  .dialog-title{font-family:'Anton',sans-serif;font-size:28px;font-weight:400;line-height:1.15;text-transform:uppercase;direction:ltr;text-align:right}
+  .dialog-close{width:38px;height:38px;flex:0 0 auto;border:0;border-radius:50%;background:rgba(255,255,255,.06);color:var(--ink);font-size:24px;cursor:pointer}
+  .dialog-section{padding:16px 0;border-top:1px solid var(--line)}
+  .dialog-section h4{font-size:14px;margin-bottom:9px;color:var(--ink)}
+  .dialog-instructions{color:var(--ink-dim);font-size:14px;line-height:1.8}
+  .dialog-form-grid{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:start}
+  .field-label{display:block;margin-bottom:7px;color:var(--ink-dim);font-size:12px;font-weight:700}
+  .dialog-input,.dialog-notes{
+    width:100%;border:1px solid rgba(245,241,232,.14);border-radius:8px;background:rgba(255,255,255,.04);
+    color:var(--ink);font:500 14px 'Tajawal',sans-serif;outline:none;
+  }
+  .dialog-input{height:44px;padding:0 12px;direction:ltr;text-align:right}
+  .dialog-notes{min-height:110px;padding:11px 12px;resize:vertical}
+  .dialog-input:focus,.dialog-notes:focus{border-color:var(--accent-2);box-shadow:0 0 0 3px rgba(255,181,71,.12)}
+  .save-state{min-height:20px;margin-top:10px;color:#5ddb87;font-size:12px;font-weight:700}
+
+  .sub-header{
+    display:flex;align-items:center;gap:14px;margin:50px 0 24px;
+    font-family:'Anton',sans-serif;font-size:26px;font-weight:400;
+    text-transform:uppercase;letter-spacing:.01em;
+  }
+  .sub-header .icon{
+    width:42px;height:42px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;background:rgba(255,77,45,.12);
+  }
+  .sub-line{flex:1;height:1px;background:var(--line)}
+  .sub-ar{font-family:'Reem Kufi',sans-serif;font-size:14px;color:var(--ink-dim);font-weight:500}
+
+  .cardio-box{
+    background:linear-gradient(135deg,rgba(255,77,45,0.08),rgba(255,181,71,0.04));
+    border:1px solid var(--line);border-radius:18px;padding:24px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  }
+  .cardio-text{flex:1;min-width:240px}
+  .cardio-text h4{font-family:'Anton',sans-serif;font-size:22px;margin-bottom:4px;text-transform:uppercase;letter-spacing:.01em;font-weight:400}
+  .cardio-text .cardio-ar{color:var(--ink-dim);font-size:13px;font-family:'Reem Kufi',sans-serif;margin-bottom:8px}
+  .cardio-text p{color:var(--ink-dim);font-size:14px}
+  .cardio-time{font-family:'Bebas Neue',sans-serif;font-size:54px;color:var(--accent);line-height:1}
+
+  .circuit-box{
+    background:linear-gradient(135deg,rgba(255,181,71,.15),rgba(255,77,45,.08));
+    border:1px solid var(--line);border-radius:18px;padding:20px 26px;margin-bottom:30px;
+    display:flex;gap:20px;align-items:center;flex-wrap:wrap;
+  }
+
+  footer{padding:60px 5vw 40px;text-align:center;color:var(--ink-dim);font-size:13px}
+  footer .quote{font-family:'Anton',sans-serif;font-size:32px;color:var(--ink);margin-bottom:12px;font-weight:400;text-transform:uppercase;letter-spacing:.01em}
+  footer .quote-ar{font-family:'Reem Kufi',sans-serif;font-size:16px;color:var(--ink-dim);margin-bottom:20px}
+  footer .accent-text{color:var(--accent)}
+  footer .rest-source{max-width:760px;margin:18px auto 0;line-height:1.7}
+  footer .rest-source a{color:var(--accent-2);text-decoration:none;border-bottom:1px solid rgba(255,181,71,.35)}
+
+  /* SVG Figure Animation */
+  .figure .body{transform-origin:center;animation:breathe 3s ease-in-out infinite}
+  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+  .figure .ground{stroke:rgba(255,255,255,0.1)}
+
+  @media (max-width:640px){
+    html{scroll-padding-top:12px}
+    body{padding-bottom:76px}
+    .hero{padding:42px 18px 34px}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-side{display:none}
+    h1.title{font-size:56px;line-height:.93}
+    .badge{margin-bottom:20px;padding:6px 11px;font-size:11px}
+    .subtitle{margin-top:18px;font-size:14px}
+    .stats{gap:24px;margin-top:22px;padding-top:18px}
+    .stat-num{font-size:36px}
+    .nav-days{
+      position:fixed;top:auto;right:0;bottom:0;left:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+      border-top:1px solid var(--line);border-bottom:0;background:rgba(13,13,15,.94);
+    }
+    .nav-inner{gap:7px;overflow:visible;direction:ltr}
+    .day-pill{width:auto;min-width:0;flex:1;height:48px;padding:0;border-radius:8px;justify-content:center;font-size:0;direction:ltr}
+    .day-pill::after{content:attr(data-short);font:400 16px 'Bebas Neue',sans-serif;letter-spacing:.08em}
+    .day-pill .pill-dot{display:none}
+    .day-section{padding:48px 16px;scroll-margin-top:0}
+    .day-header{grid-template-columns:64px 1fr;gap:14px;margin-bottom:28px;align-items:start}
+    .day-num{font-size:64px}
+    .day-info h2{font-size:27px;line-height:1.05}
+    .day-info .day-arabic{font-size:13px;line-height:1.55}
+    .day-tag{grid-column:1/-1;margin-top:-4px;justify-self:start;border-radius:6px}
+    .day-progress{max-width:none;margin-top:12px}
+    .exercises{grid-template-columns:1fr}
+    .ex-meta{padding:15px}
+    .ex-name-en{font-size:21px}
+    .ex-benefit{font-size:12px}
+    .rest-note{padding:9px 10px}
+    .sub-header{margin-top:36px;font-size:22px}
+    .cardio-box,.circuit-box{border-radius:8px;padding:18px}
+    .rest-timer{bottom:76px}
+    .dialog-form-grid{grid-template-columns:1fr}
+    .exercise-dialog{padding:10px}
+    .exercise-dialog-panel{max-height:calc(100vh - 20px);padding:18px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    .reveal-ready .ex-card{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="badge"><span class="badge-dot"></span> 5-Day Plan • Bodyweight + Cardio</div>
+      <h1 class="title">Stronger<br/>in <span class="accent">5</span><br/>Days</h1>
+      <p class="subtitle">جدول تدريب أسبوعي متكامل: Upper, Lower, Cardio, Pull, و Full Body. كل تمرين مع رسم توضيحي وفيديو وفوائده.</p>
+      <div class="stats">
+        <div><div class="stat-num">5</div><div class="stat-label">Days</div></div>
+        <div><div class="stat-num">25+</div><div class="stat-label">Exercises</div></div>
+        <div><div class="stat-num">60′</div><div class="stat-label">Per Session</div></div>
+      </div>
+    </div>
+    <div class="hero-side">WORKOUT • PLAN • 2026</div>
+  </div>
+</section>
+
+<nav class="nav-days">
+  <div class="nav-inner">
+    <a class="day-pill" href="#day1" data-short="D1"><span class="pill-dot" style="background:#ff4d2d"></span> Day 1 — Upper Body</a>
+    <a class="day-pill" href="#day2" data-short="D2"><span class="pill-dot" style="background:#5ddb87"></span> Day 2 — Lower Body</a>
+    <a class="day-pill" href="#day3" data-short="D3"><span class="pill-dot" style="background:#4dabff"></span> Day 3 — Cardio + Core</a>
+    <a class="day-pill" href="#day4" data-short="D4"><span class="pill-dot" style="background:#c084fc"></span> Day 4 — Pull Day</a>
+    <a class="day-pill" href="#day5" data-short="D5"><span class="pill-dot" style="background:#ffb547"></span> Day 5 — Full Body</a>
+  </div>
+</nav>
+
+<!-- ============== DAY 1 — UPPER BODY ============== -->
+<section class="day-section day-1" id="day1">
+  <div class="day-header">
+    <div class="day-num">01</div>
+    <div class="day-info">
+      <h2>Upper Body Day</h2>
+      <p class="day-arabic">يوم الجزء العلوي — الصدر، الكتف، التراي</p>
+    </div>
+    <span class="day-tag">UPPER</span>
+  </div>
+
+  <div class="exercises">
+
+    <!-- Push-Ups -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=how+to+do+push+ups+proper+form" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pushG" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#ff6b4a"/>
+              <stop offset="1" stop-color="#ff4d2d"/>
+            </linearGradient>
+          </defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Arms -->
+            <line x1="100" y1="155" x2="100" y2="200" stroke="url(#pushG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="200" y1="155" x2="200" y2="200" stroke="url(#pushG)" stroke-width="14" stroke-linecap="round"/>
+            <!-- Body -->
+            <path d="M100,155 Q200,140 300,155 L320,160 L320,170 L100,165 Z" fill="url(#pushG)"/>
+            <!-- Legs -->
+            <line x1="300" y1="160" x2="370" y2="195" stroke="url(#pushG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Head -->
+            <circle cx="85" cy="155" r="16" fill="url(#pushG)"/>
+            <!-- Feet -->
+            <line x1="365" y1="195" x2="380" y2="200" stroke="url(#pushG)" stroke-width="6" stroke-linecap="round"/>
+            <!-- Hands ground -->
+            <ellipse cx="100" cy="201" rx="10" ry="3" fill="rgba(0,0,0,.3)"/>
+            <ellipse cx="200" cy="201" rx="10" ry="3" fill="rgba(0,0,0,.3)"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="16" fill="rgba(255,255,255,.3)" letter-spacing="3">PUSH-UP</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">CHEST · TRI</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Push-Ups</h3>
+        <span class="ex-name-ar">ضغط عادي</span>
+        <div class="ex-reps">4 × 12–20</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> تقوية الصدر، الكتف الأمامي، التراي، وعضلات الكور. تمرين أساسي يبني قوة الجزء العلوي.</p>
+      </div>
+    </article>
+
+    <!-- Incline Push-Ups -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=incline+push+ups+chair+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="incG" x1="0" x2="1"><stop offset="0" stop-color="#ff6b4a"/><stop offset="1" stop-color="#ff4d2d"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <!-- Chair -->
+          <rect x="90" y="120" width="100" height="14" fill="#4a4a55" rx="2"/>
+          <rect x="92" y="134" width="8" height="86" fill="#3a3a45"/>
+          <rect x="180" y="134" width="8" height="86" fill="#3a3a45"/>
+          <g class="body">
+            <!-- Body diagonal -->
+            <path d="M90,115 L295,180 L320,185 L320,195 L90,125 Z" fill="url(#incG)"/>
+            <!-- Arms down to chair -->
+            <line x1="105" y1="120" x2="105" y2="125" stroke="url(#incG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="170" y1="120" x2="170" y2="125" stroke="url(#incG)" stroke-width="14" stroke-linecap="round"/>
+            <!-- Legs -->
+            <line x1="295" y1="180" x2="370" y2="215" stroke="url(#incG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Head -->
+            <circle cx="78" cy="113" r="15" fill="url(#incG)"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">INCLINE PUSH-UP</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">LOWER CHEST</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Incline Push-Ups</h3>
+        <span class="ex-name-ar">ضغط مائل (إيدك على كرسي)</span>
+        <div class="ex-reps">3 × 12</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> أسهل من الضغط العادي، يستهدف الجزء السفلي من الصدر، مثالي للمبتدئين أو لزيادة عدد التكرارات.</p>
+      </div>
+    </article>
+
+    <!-- Pike Push-Ups -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=pike+push+up+shoulders+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="pikeG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff6b4a"/><stop offset="1" stop-color="#ff4d2d"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Inverted V body -->
+            <path d="M80,215 L195,80 L310,215 L295,220 L195,100 L95,220 Z" fill="url(#pikeG)"/>
+            <!-- Arms going to ground -->
+            <line x1="85" y1="218" x2="85" y2="222" stroke="url(#pikeG)" stroke-width="6" stroke-linecap="round"/>
+            <line x1="305" y1="218" x2="305" y2="222" stroke="url(#pikeG)" stroke-width="6" stroke-linecap="round"/>
+            <!-- Head down at peak -->
+            <circle cx="195" cy="70" r="15" fill="url(#pikeG)"/>
+            <!-- Hands -->
+            <ellipse cx="85" cy="221" rx="10" ry="3" fill="rgba(0,0,0,.3)"/>
+            <ellipse cx="305" cy="221" rx="10" ry="3" fill="rgba(0,0,0,.3)"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">PIKE PUSH-UP</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">SHOULDERS</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Pike Push-Ups</h3>
+        <span class="ex-name-ar">ضغط بايك (للأكتاف)</span>
+        <div class="ex-reps">4 × 10</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يستهدف الكتف بشكل مكثف ويحاكي تمرين الضغط العسكري بدون أوزان، يبني عضلات الديلتويد.</p>
+      </div>
+    </article>
+
+    <!-- Chair Dips -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=chair+dips+triceps+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="dipsG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff6b4a"/><stop offset="1" stop-color="#ff4d2d"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <!-- Chair -->
+          <rect x="80" y="130" width="120" height="14" fill="#4a4a55" rx="2"/>
+          <rect x="82" y="144" width="8" height="76" fill="#3a3a45"/>
+          <rect x="190" y="144" width="8" height="76" fill="#3a3a45"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="245" cy="80" r="15" fill="url(#dipsG)"/>
+            <!-- Torso bent -->
+            <path d="M232,93 L240,160 L260,160 L252,93 Z" fill="url(#dipsG)"/>
+            <!-- Arms back to chair -->
+            <line x1="232" y1="100" x2="170" y2="138" stroke="url(#dipsG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Legs forward extended -->
+            <path d="M250,160 L320,200 L335,200 L335,210 L320,210 L240,170 Z" fill="url(#dipsG)"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">CHAIR DIPS</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">TRICEPS</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Chair Dips</h3>
+        <span class="ex-name-ar">دبس الكرسي</span>
+        <div class="ex-reps">4 × 10–15</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> أفضل تمرين للترايسبس بوزن الجسم، يقوي الذراع الخلفية ويشكلها، ويفيد الكتف أيضاً.</p>
+      </div>
+    </article>
+
+    <!-- Shoulder Taps -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=plank+shoulder+taps+exercise+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="shldG" x1="0" x2="1"><stop offset="0" stop-color="#ff6b4a"/><stop offset="1" stop-color="#ff4d2d"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Plank body -->
+            <path d="M100,150 L300,140 L320,145 L320,158 L100,165 Z" fill="url(#shldG)"/>
+            <!-- Standing arm -->
+            <line x1="100" y1="165" x2="100" y2="200" stroke="url(#shldG)" stroke-width="14" stroke-linecap="round"/>
+            <!-- Tapping arm (lifted to opposite shoulder) -->
+            <path d="M180,150 Q170,120 220,135" stroke="url(#shldG)" stroke-width="13" fill="none" stroke-linecap="round"/>
+            <!-- Hand tapping shoulder indicator -->
+            <circle cx="220" cy="135" r="6" fill="#ffb547"/>
+            <path d="M225,127 L235,120 M225,140 L235,143" stroke="#ffb547" stroke-width="2" stroke-linecap="round"/>
+            <!-- Head -->
+            <circle cx="85" cy="148" r="15" fill="url(#shldG)"/>
+            <!-- Legs -->
+            <line x1="300" y1="148" x2="370" y2="195" stroke="url(#shldG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="320" y1="148" x2="380" y2="195" stroke="url(#shldG)" stroke-width="13" stroke-linecap="round" opacity=".7"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">SHOULDER TAPS</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">CORE · SHLD</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Shoulder Taps</h3>
+        <span class="ex-name-ar">لمس الأكتاف</span>
+        <div class="ex-reps">3 × 20</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يقوي الكور والثبات، يحسن التوازن، ويفعّل الكتف وعضلات البطن العميقة في نفس الوقت.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <h3 class="sub-header"><span class="icon">🔥</span> Cardio <span class="sub-ar">/ كارديو</span><span class="sub-line"></span></h3>
+  <div class="cardio-box">
+    <div class="cardio-text">
+      <h4>Treadmill — Walk + Light Jog</h4>
+      <div class="cardio-ar">تريدميل — مشي سريع وجري خفيف</div>
+      <p>5 minutes warm-up + 15 minutes (alternating brisk walk and light jog)</p>
+    </div>
+    <div class="cardio-time">20′</div>
+  </div>
+</section>
+
+<!-- ============== DAY 2 — LOWER BODY ============== -->
+<section class="day-section day-2" id="day2">
+  <div class="day-header">
+    <div class="day-num">02</div>
+    <div class="day-info">
+      <h2>Lower Body Day</h2>
+      <p class="day-arabic">يوم الأرجل والبطن — اليوم الأهم</p>
+    </div>
+    <span class="day-tag">LOWER ⭐</span>
+  </div>
+
+  <div class="exercises">
+
+    <!-- Squats -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=how+to+do+squats+proper+form" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="sqG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7eedaa"/><stop offset="1" stop-color="#5ddb87"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="200" cy="60" r="17" fill="url(#sqG)"/>
+            <!-- Torso (leaning slightly forward) -->
+            <path d="M188,76 L172,140 L228,140 L212,76 Z" fill="url(#sqG)"/>
+            <!-- Arms forward for balance -->
+            <line x1="190" y1="100" x2="150" y2="115" stroke="url(#sqG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="210" y1="100" x2="250" y2="115" stroke="url(#sqG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Thighs (bent) -->
+            <path d="M172,140 L155,180 L185,180 L188,140 Z" fill="url(#sqG)"/>
+            <path d="M212,140 L245,180 L215,180 L212,140 Z" fill="url(#sqG)"/>
+            <!-- Calves down -->
+            <line x1="170" y1="180" x2="170" y2="218" stroke="url(#sqG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="230" y1="180" x2="230" y2="218" stroke="url(#sqG)" stroke-width="14" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">SQUAT</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">QUADS · GLUTE</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Squats</h3>
+        <span class="ex-name-ar">القرفصاء</span>
+        <div class="ex-reps">4 × 15</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> ملك تمارين الأرجل، يبني الفخذ والمؤخرة، يقوي الركبة، ويحرق سعرات عالية.</p>
+      </div>
+    </article>
+
+    <!-- Lunges -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=lunges+exercise+proper+form" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="lunG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7eedaa"/><stop offset="1" stop-color="#5ddb87"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="180" cy="55" r="16" fill="url(#lunG)"/>
+            <!-- Torso upright -->
+            <path d="M168,71 L162,140 L200,140 L192,71 Z" fill="url(#lunG)"/>
+            <!-- Front leg bent 90 -->
+            <path d="M195,140 L260,180 L275,180 L210,140 Z" fill="url(#lunG)"/>
+            <line x1="265" y1="180" x2="265" y2="218" stroke="url(#lunG)" stroke-width="14" stroke-linecap="round"/>
+            <!-- Back leg bent toward floor -->
+            <path d="M170,140 L130,200 L150,210 L185,145 Z" fill="url(#lunG)"/>
+            <line x1="135" y1="207" x2="115" y2="218" stroke="url(#lunG)" stroke-width="12" stroke-linecap="round"/>
+            <!-- Arms down -->
+            <line x1="170" y1="100" x2="155" y2="135" stroke="url(#lunG)" stroke-width="11" stroke-linecap="round"/>
+            <line x1="190" y1="100" x2="200" y2="135" stroke="url(#lunG)" stroke-width="11" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">LUNGES</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">LEGS · GLUTES</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Lunges</h3>
+        <span class="ex-name-ar">الطعنات</span>
+        <div class="ex-reps">3 × 12 لكل رجل</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يصحح اختلال القوة بين الرجلين، يشد المؤخرة والفخذ الأمامي، ويحسن التوازن والمرونة.</p>
+      </div>
+    </article>
+
+    <!-- Bulgarian Split Squat -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=bulgarian+split+squat+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="bgG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7eedaa"/><stop offset="1" stop-color="#5ddb87"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <!-- Bench behind -->
+          <rect x="290" y="160" width="90" height="12" fill="#4a4a55" rx="2"/>
+          <rect x="295" y="172" width="6" height="48" fill="#3a3a45"/>
+          <rect x="370" y="172" width="6" height="48" fill="#3a3a45"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="160" cy="50" r="16" fill="url(#bgG)"/>
+            <!-- Torso -->
+            <path d="M148,66 L142,140 L180,140 L172,66 Z" fill="url(#bgG)"/>
+            <!-- Front leg bent -->
+            <path d="M175,140 L210,180 L225,180 L185,140 Z" fill="url(#bgG)"/>
+            <line x1="215" y1="180" x2="215" y2="218" stroke="url(#bgG)" stroke-width="14" stroke-linecap="round"/>
+            <!-- Back leg up on bench (foot pointing back) -->
+            <path d="M150,140 L240,160 L300,168 L300,178 L155,150 Z" fill="url(#bgG)"/>
+            <!-- Arms -->
+            <line x1="150" y1="100" x2="135" y2="135" stroke="url(#bgG)" stroke-width="11" stroke-linecap="round"/>
+            <line x1="170" y1="100" x2="180" y2="135" stroke="url(#bgG)" stroke-width="11" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">BULGARIAN SPLIT</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">QUADS · GLUTE</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Bulgarian Split Squat</h3>
+        <span class="ex-name-ar">القرفصاء البلغارية</span>
+        <div class="ex-reps">3 × 10</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> تمرين قوي جداً للفخذ والمؤخرة، يستهدف رجل واحدة بشدة، ويحسن الثبات بشكل ملحوظ.</p>
+      </div>
+    </article>
+
+    <!-- Glute Bridge -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=glute+bridge+exercise+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="gbG" x1="0" x2="1"><stop offset="0" stop-color="#7eedaa"/><stop offset="1" stop-color="#5ddb87"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head on ground -->
+            <circle cx="80" cy="180" r="16" fill="url(#gbG)"/>
+            <!-- Body raised at hips -->
+            <path d="M95,170 Q160,110 220,160 L240,165 L240,175 L98,180 Z" fill="url(#gbG)"/>
+            <!-- Bent knees down to floor -->
+            <line x1="230" y1="170" x2="245" y2="200" stroke="url(#gbG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="220" y1="170" x2="225" y2="200" stroke="url(#gbG)" stroke-width="14" stroke-linecap="round"/>
+            <!-- Arms flat on ground -->
+            <line x1="95" y1="180" x2="95" y2="195" stroke="url(#gbG)" stroke-width="9" stroke-linecap="round"/>
+            <!-- Lift indicator arrow -->
+            <path d="M170,90 L170,75 M165,80 L170,75 L175,80" stroke="#ffb547" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">GLUTE BRIDGE</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">GLUTES</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Glute Bridge</h3>
+        <span class="ex-name-ar">جسر المؤخرة</span>
+        <div class="ex-reps">4 × 15</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يفعّل عضلات المؤخرة بشكل مباشر، يقوي أسفل الظهر، ويحسن وضعية الجسم.</p>
+      </div>
+    </article>
+
+    <!-- Calf Raises -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=calf+raises+exercise+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="cfG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7eedaa"/><stop offset="1" stop-color="#5ddb87"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="200" cy="55" r="16" fill="url(#cfG)"/>
+            <!-- Torso -->
+            <path d="M188,71 L182,150 L218,150 L212,71 Z" fill="url(#cfG)"/>
+            <!-- Arms straight down -->
+            <line x1="184" y1="100" x2="160" y2="180" stroke="url(#cfG)" stroke-width="11" stroke-linecap="round"/>
+            <line x1="216" y1="100" x2="240" y2="180" stroke="url(#cfG)" stroke-width="11" stroke-linecap="round"/>
+            <!-- Legs straight -->
+            <line x1="190" y1="150" x2="185" y2="205" stroke="url(#cfG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="210" y1="150" x2="215" y2="205" stroke="url(#cfG)" stroke-width="14" stroke-linecap="round"/>
+            <!-- Toes raised -->
+            <ellipse cx="185" cy="208" rx="10" ry="4" fill="url(#cfG)"/>
+            <ellipse cx="215" cy="208" rx="10" ry="4" fill="url(#cfG)"/>
+            <!-- Up arrow -->
+            <path d="M270,140 L270,100 M260,110 L270,100 L280,110" stroke="#ffb547" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">CALF RAISES</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">CALVES</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Calf Raises</h3>
+        <span class="ex-name-ar">رفع السمانة</span>
+        <div class="ex-reps">4 × 20</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يقوي عضلات السمانة، يحسن قوة القفز والجري، ويعطي شكلاً متناسقاً للساق.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <h3 class="sub-header"><span class="icon">🔥</span> Abs <span class="sub-ar">/ البطن</span><span class="sub-line"></span></h3>
+  <div class="exercises">
+
+    <!-- Leg Raises -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=leg+raises+exercise+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="lrG" x1="0" x2="1"><stop offset="0" stop-color="#7eedaa"/><stop offset="1" stop-color="#5ddb87"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="60" cy="180" r="15" fill="url(#lrG)"/>
+            <!-- Torso flat on ground -->
+            <path d="M75,172 L200,172 L200,188 L75,188 Z" fill="url(#lrG)"/>
+            <!-- Legs raised -->
+            <path d="M195,170 L300,90 L315,100 L210,180 Z" fill="url(#lrG)"/>
+            <!-- Arms by side -->
+            <line x1="100" y1="188" x2="100" y2="195" stroke="url(#lrG)" stroke-width="9" stroke-linecap="round"/>
+            <line x1="160" y1="188" x2="160" y2="195" stroke="url(#lrG)" stroke-width="9" stroke-linecap="round"/>
+            <!-- Direction arrow -->
+            <path d="M280,140 Q300,120 320,90" stroke="#ffb547" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
+            <path d="M320,90 L315,98 M320,90 L313,90" stroke="#ffb547" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">LEG RAISES</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">LOWER ABS</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Leg Raises</h3>
+        <span class="ex-name-ar">رفع الأرجل</span>
+        <div class="ex-reps">3 × 15</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يستهدف عضلات البطن السفلية بشكل قوي، يقوي عضلات الحوض، ويعطي شكل ال V للجسم.</p>
+      </div>
+    </article>
+
+    <!-- Plank -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=plank+exercise+proper+form" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="plG" x1="0" x2="1"><stop offset="0" stop-color="#7eedaa"/><stop offset="1" stop-color="#5ddb87"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="80" cy="130" r="15" fill="url(#plG)"/>
+            <!-- Body straight -->
+            <path d="M95,123 L300,118 L320,123 L320,138 L95,143 Z" fill="url(#plG)"/>
+            <!-- Forearms on ground (forearm plank) -->
+            <line x1="95" y1="143" x2="95" y2="195" stroke="url(#plG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="115" y1="143" x2="115" y2="195" stroke="url(#plG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="95" y1="195" x2="135" y2="200" stroke="url(#plG)" stroke-width="11" stroke-linecap="round"/>
+            <!-- Legs straight -->
+            <line x1="300" y1="125" x2="365" y2="195" stroke="url(#plG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="320" y1="135" x2="375" y2="195" stroke="url(#plG)" stroke-width="13" stroke-linecap="round" opacity=".7"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">PLANK</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">FULL CORE</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Plank</h3>
+        <span class="ex-name-ar">البلانك</span>
+        <div class="ex-reps">3 × 45–60 ثانية</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> أفضل تمرين لكامل الكور، يقوي البطن والظهر معاً، يحسن وضعية الجسم، ويحرق دهون البطن.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <h3 class="sub-header"><span class="icon">🏃</span> Cardio <span class="sub-ar">/ كارديو</span><span class="sub-line"></span></h3>
+  <div class="cardio-box">
+    <div class="cardio-text">
+      <h4>Incline Walking</h4>
+      <div class="cardio-ar">مشي بميلان على التريدميل</div>
+      <p>20 minutes of incline walking — strong fat burn without knee strain</p>
+    </div>
+    <div class="cardio-time">20′</div>
+  </div>
+</section>
+
+<!-- ============== DAY 3 — CARDIO + CORE ============== -->
+<section class="day-section day-3" id="day3">
+  <div class="day-header">
+    <div class="day-num">03</div>
+    <div class="day-info">
+      <h2>Cardio + Core</h2>
+      <p class="day-arabic">يوم الكارديو والكور — حرق دهون قوي</p>
+    </div>
+    <span class="day-tag">FAT BURN</span>
+  </div>
+
+  <div class="cardio-box" style="margin-bottom:30px">
+    <div class="cardio-text">
+      <h4>🏃 HIIT Treadmill</h4>
+      <div class="cardio-ar">تمارين متقطعة عالية الكثافة على التريدميل</div>
+      <p>5 min warm-up + 20 min (30 sec sprint / 1 min walk — repeat)</p>
+    </div>
+    <div class="cardio-time">25′</div>
+  </div>
+
+  <h3 class="sub-header"><span class="icon">🔥</span> Core Exercises <span class="sub-ar">/ تمارين البطن</span><span class="sub-line"></span></h3>
+
+  <div class="exercises">
+
+    <!-- Mountain Climbers -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=mountain+climbers+exercise+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="mcG" x1="0" x2="1"><stop offset="0" stop-color="#6cc0ff"/><stop offset="1" stop-color="#4dabff"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="80" cy="120" r="15" fill="url(#mcG)"/>
+            <!-- Body plank -->
+            <path d="M95,113 L260,130 L280,135 L280,148 L95,128 Z" fill="url(#mcG)"/>
+            <!-- Arms supporting -->
+            <line x1="95" y1="128" x2="95" y2="195" stroke="url(#mcG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="115" y1="128" x2="115" y2="195" stroke="url(#mcG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- One leg back, one knee tucked -->
+            <line x1="280" y1="140" x2="350" y2="195" stroke="url(#mcG)" stroke-width="13" stroke-linecap="round"/>
+            <path d="M260,140 Q220,160 180,165" stroke="url(#mcG)" stroke-width="13" fill="none" stroke-linecap="round"/>
+            <!-- Motion arrows -->
+            <path d="M180,170 Q200,165 220,170" stroke="#ffb547" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
+            <path d="M340,180 Q330,190 320,185" stroke="#ffb547" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">MOUNTAIN CLIMBERS</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">CORE · CARDIO</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Mountain Climbers</h3>
+        <span class="ex-name-ar">متسلق الجبل</span>
+        <div class="ex-reps">3 × 30 ثانية</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> تمرين كارديو وقوة معاً، يحرق سعرات عالية، يقوي البطن، ويرفع معدل ضربات القلب بسرعة.</p>
+      </div>
+    </article>
+
+    <!-- Russian Twists -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=russian+twists+exercise+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="rtG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6cc0ff"/><stop offset="1" stop-color="#4dabff"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Sitting position with leaning torso -->
+            <!-- Head -->
+            <circle cx="220" cy="60" r="15" fill="url(#rtG)"/>
+            <!-- Leaning torso -->
+            <path d="M210,75 L160,160 L200,160 L235,75 Z" fill="url(#rtG)"/>
+            <!-- Bent knees up -->
+            <path d="M170,160 L300,140 L300,160 L185,170 Z" fill="url(#rtG)"/>
+            <!-- Calves down -->
+            <line x1="295" y1="155" x2="305" y2="200" stroke="url(#rtG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Twisted arms holding weight -->
+            <path d="M180,110 Q120,140 95,135" stroke="url(#rtG)" stroke-width="13" fill="none" stroke-linecap="round"/>
+            <ellipse cx="90" cy="135" rx="14" ry="9" fill="#ffb547"/>
+            <!-- Twist arrow -->
+            <path d="M250,110 Q280,120 290,140" stroke="#ffb547" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
+            <path d="M285,135 L290,140 L285,145" stroke="#ffb547" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">RUSSIAN TWISTS</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">OBLIQUES</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Russian Twists</h3>
+        <span class="ex-name-ar">اللف الروسي</span>
+        <div class="ex-reps">3 × 20</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يستهدف الجوانب (Obliques)، ينحت الخصر، يقوي الكور، ويحسن المرونة في الجذع.</p>
+      </div>
+    </article>
+
+    <!-- Bicycle Crunch -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=bicycle+crunch+exercise+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="bcG" x1="0" x2="1"><stop offset="0" stop-color="#6cc0ff"/><stop offset="1" stop-color="#4dabff"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head lifted -->
+            <circle cx="100" cy="135" r="15" fill="url(#bcG)"/>
+            <!-- Torso slightly raised -->
+            <path d="M115,128 L210,150 L230,155 L230,170 L115,143 Z" fill="url(#bcG)"/>
+            <!-- One hand behind head -->
+            <path d="M105,125 Q130,90 155,105" stroke="url(#bcG)" stroke-width="11" fill="none" stroke-linecap="round"/>
+            <!-- Other elbow toward opposite knee -->
+            <path d="M115,140 L180,120" stroke="url(#bcG)" stroke-width="11" fill="none" stroke-linecap="round"/>
+            <!-- One leg extended -->
+            <path d="M225,160 L335,180 L350,180 L350,190 L230,175 Z" fill="url(#bcG)"/>
+            <!-- One knee bent up -->
+            <path d="M210,160 L195,100 L210,95 L225,160 Z" fill="url(#bcG)"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">BICYCLE CRUNCH</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">FULL ABS</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Bicycle Crunch</h3>
+        <span class="ex-name-ar">دراجة البطن</span>
+        <div class="ex-reps">3 × 20</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> من أفضل تمارين البطن، يستهدف الجوانب والبطن العلوية والسفلية معاً في حركة واحدة.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== DAY 4 — PULL DAY ============== -->
+<section class="day-section day-4" id="day4">
+  <div class="day-header">
+    <div class="day-num">04</div>
+    <div class="day-info">
+      <h2>Pull Day</h2>
+      <p class="day-arabic">يوم الشد — الظهر والباي</p>
+    </div>
+    <span class="day-tag">PULL</span>
+  </div>
+
+  <div class="exercises">
+
+    <!-- One-Arm Dumbbell Row -->
+    <article class="ex-card" style="order:1">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=one+arm+dumbbell+row+proper+form" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="oadrG" x1="0" x2="1"><stop offset="0" stop-color="#d4a3fc"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="215" x2="380" y2="215" stroke-width="2" stroke-dasharray="4 6"/>
+          <rect x="65" y="150" width="145" height="12" rx="3" fill="#3a3a45"/>
+          <g class="body">
+            <circle cx="220" cy="72" r="16" fill="url(#oadrG)"/>
+            <path d="M205,88 L125,125 L142,155 L225,104 Z" fill="url(#oadrG)"/>
+            <line x1="145" y1="130" x2="105" y2="157" stroke="url(#oadrG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="215" y1="105" x2="248" y2="158" stroke="url(#oadrG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="155" y1="150" x2="150" y2="213" stroke="url(#oadrG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="205" y1="105" x2="290" y2="210" stroke="url(#oadrG)" stroke-width="14" stroke-linecap="round"/>
+            <rect x="235" y="155" width="27" height="12" rx="2" fill="#ffb547"/>
+            <rect x="231" y="151" width="6" height="20" rx="1" fill="#ffb547"/>
+            <rect x="260" y="151" width="6" height="20" rx="1" fill="#ffb547"/>
+          </g>
+          <text x="200" y="242" text-anchor="middle" font-family="Bebas Neue" font-size="13" fill="rgba(255,255,255,.3)" letter-spacing="3">ONE-ARM DUMBBELL ROW</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">BACK · LATS</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">One-Arm Dumbbell Row</h3>
+        <span class="ex-name-ar">سحب دمبل بذراع واحدة</span>
+        <div class="ex-reps">4 × 12–15 لكل يد</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يستهدف عضلات الظهر واللاتس لكل جهة على حدة، ويساعد على تحسين التوازن وقوة السحب.</p>
+      </div>
+    </article>
+
+    <!-- Dumbbell Pullover -->
+    <article class="ex-card" style="order:3">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=dumbbell+pullover+proper+form" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="dpG" x1="0" x2="1"><stop offset="0" stop-color="#d4a3fc"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="215" x2="380" y2="215" stroke-width="2" stroke-dasharray="4 6"/>
+          <rect x="115" y="145" width="190" height="14" rx="3" fill="#3a3a45"/>
+          <rect x="145" y="159" width="12" height="56" fill="#2a2a35"/>
+          <rect x="270" y="159" width="12" height="56" fill="#2a2a35"/>
+          <g class="body">
+            <circle cx="125" cy="126" r="16" fill="url(#dpG)"/>
+            <path d="M140,120 L275,125 L285,145 L140,145 Z" fill="url(#dpG)"/>
+            <line x1="155" y1="125" x2="105" y2="70" stroke="url(#dpG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="170" y1="128" x2="120" y2="68" stroke="url(#dpG)" stroke-width="13" stroke-linecap="round"/>
+            <rect x="98" y="55" width="30" height="14" rx="2" fill="#ffb547"/>
+            <rect x="94" y="51" width="6" height="22" rx="1" fill="#ffb547"/>
+            <rect x="126" y="51" width="6" height="22" rx="1" fill="#ffb547"/>
+            <line x1="275" y1="140" x2="320" y2="205" stroke="url(#dpG)" stroke-width="14" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="242" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">DUMBBELL PULLOVER</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">LATS · CHEST</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Dumbbell Pullover</h3>
+        <span class="ex-name-ar">سحب الدمبل خلف الرأس</span>
+        <div class="ex-reps">3 × 12–15</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يقوي عضلات اللاتس والصدر ويحسن مدى حركة الكتفين مع الحفاظ على تحكم كامل بالوزن.</p>
+      </div>
+    </article>
+
+    <!-- Superman Hold -->
+    <article class="ex-card" style="order:7">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=superman+hold+exercise+back" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="smG" x1="0" x2="1"><stop offset="0" stop-color="#d4a3fc"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Body face down, raised -->
+            <path d="M80,140 L300,135 L320,140 L320,155 L80,160 Z" fill="url(#smG)"/>
+            <!-- Head looking forward, slightly raised -->
+            <circle cx="65" cy="138" r="15" fill="url(#smG)"/>
+            <!-- Arms extended forward and raised -->
+            <path d="M85,135 L30,110 L25,118 L80,150 Z" fill="url(#smG)"/>
+            <!-- Legs lifted up -->
+            <path d="M300,150 L370,115 L375,123 L305,162 Z" fill="url(#smG)"/>
+            <!-- Lift indicator -->
+            <path d="M200,90 L200,105 M195,100 L200,105 L205,100" stroke="#ffb547" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <text x="200" y="86" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#ffb547" letter-spacing="2">HOLD</text>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">SUPERMAN HOLD</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">LOWER BACK</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Superman Hold</h3>
+        <span class="ex-name-ar">سوبرمان هولد</span>
+        <div class="ex-reps">3 × 30 ثانية</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يقوي عضلات أسفل الظهر، يحسن وضعية الجسم، يقي من آلام الظهر، ويفعّل العضلات الخلفية.</p>
+      </div>
+    </article>
+
+    <!-- Reverse Snow Angels -->
+    <article class="ex-card" style="order:4">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=reverse+snow+angels+exercise" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="snG" x1="0" x2="1"><stop offset="0" stop-color="#d4a3fc"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Body face down -->
+            <path d="M120,140 L300,135 L320,140 L320,155 L120,160 Z" fill="url(#snG)"/>
+            <!-- Head -->
+            <circle cx="105" cy="138" r="15" fill="url(#snG)"/>
+            <!-- Arms in mid-sweep position (motion blur effect with overlapping) -->
+            <line x1="135" y1="135" x2="80" y2="105" stroke="url(#snG)" stroke-width="13" stroke-linecap="round" opacity=".4"/>
+            <line x1="135" y1="138" x2="70" y2="135" stroke="url(#snG)" stroke-width="13" stroke-linecap="round" opacity=".7"/>
+            <line x1="135" y1="142" x2="80" y2="170" stroke="url(#snG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="305" y1="135" x2="360" y2="105" stroke="url(#snG)" stroke-width="13" stroke-linecap="round" opacity=".4"/>
+            <line x1="305" y1="138" x2="370" y2="135" stroke="url(#snG)" stroke-width="13" stroke-linecap="round" opacity=".7"/>
+            <line x1="305" y1="142" x2="360" y2="170" stroke="url(#snG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Legs -->
+            <line x1="305" y1="155" x2="365" y2="195" stroke="url(#snG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="320" y1="155" x2="380" y2="195" stroke="url(#snG)" stroke-width="13" stroke-linecap="round" opacity=".7"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="13" fill="rgba(255,255,255,.3)" letter-spacing="3">REVERSE SNOW ANGEL</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">UPPER BACK</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Reverse Snow Angels</h3>
+        <span class="ex-name-ar">ملائكة الثلج العكسية</span>
+        <div class="ex-reps">3 × 15</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يقوي الكتف الخلفي والظهر العلوي، يحسن مرونة الكتف، ويصحح وضعية الانحناء للأمام.</p>
+      </div>
+    </article>
+
+    <!-- Towel Rows -->
+    <article class="ex-card" style="order:2">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=towel+rows+door+exercise+back" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="trG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d4a3fc"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <!-- Door / pole -->
+          <rect x="60" y="20" width="20" height="200" fill="#3a3a45"/>
+          <rect x="80" y="20" width="6" height="200" fill="#2a2a35"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="220" cy="65" r="16" fill="url(#trG)"/>
+            <!-- Leaning back torso -->
+            <path d="M210,81 L195,170 L235,170 L230,81 Z" fill="url(#trG)"/>
+            <!-- Arms pulling toward door -->
+            <line x1="208" y1="100" x2="120" y2="120" stroke="url(#trG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="232" y1="100" x2="120" y2="120" stroke="url(#trG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Towel being pulled -->
+            <path d="M115,115 L90,95 L95,125 L115,125 Z" fill="#ffb547"/>
+            <!-- Legs slightly forward -->
+            <line x1="205" y1="170" x2="195" y2="218" stroke="url(#trG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="225" y1="170" x2="240" y2="218" stroke="url(#trG)" stroke-width="14" stroke-linecap="round"/>
+          </g>
+          <text x="240" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">TOWEL ROWS</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">BACK · BICEPS</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Towel Rows</h3>
+        <span class="ex-name-ar">سحب بمنشفة على الباب</span>
+        <div class="ex-reps">4 × 10</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> بديل ممتاز لتمارين السحب بدون أوزان، يقوي الظهر العلوي والباي، ويحسن قوة القبضة.</p>
+      </div>
+    </article>
+
+    <!-- Bicep Curls -->
+    <article class="ex-card" style="order:5">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=bicep+curls+dumbbell+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="bcrG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d4a3fc"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="200" cy="55" r="16" fill="url(#bcrG)"/>
+            <!-- Torso -->
+            <path d="M188,71 L182,150 L218,150 L212,71 Z" fill="url(#bcrG)"/>
+            <!-- Right arm in curl position (flexed up) -->
+            <path d="M195,90 L155,135 L150,90 L185,90 Z" fill="url(#bcrG)"/>
+            <!-- Left arm down -->
+            <line x1="215" y1="100" x2="240" y2="180" stroke="url(#bcrG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Dumbbells -->
+            <g>
+              <rect x="143" y="78" width="22" height="14" fill="#ffb547" rx="2"/>
+              <rect x="139" y="74" width="6" height="22" fill="#ffb547" rx="1"/>
+              <rect x="163" y="74" width="6" height="22" fill="#ffb547" rx="1"/>
+            </g>
+            <g>
+              <rect x="230" y="178" width="22" height="14" fill="#ffb547" rx="2"/>
+              <rect x="226" y="174" width="6" height="22" fill="#ffb547" rx="1"/>
+              <rect x="250" y="174" width="6" height="22" fill="#ffb547" rx="1"/>
+            </g>
+            <!-- Legs -->
+            <line x1="190" y1="150" x2="185" y2="218" stroke="url(#bcrG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="210" y1="150" x2="215" y2="218" stroke="url(#bcrG)" stroke-width="14" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">BICEP CURLS</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">BICEPS</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Bicep Curls</h3>
+        <span class="ex-name-ar">سحب البايسبس</span>
+        <div class="ex-reps">4 × 12</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يبني عضلة البايسبس مباشرة، استخدم دمبل أو جالون مي. يقوي الذراع الأمامية ويعطي شكلاً مميزاً.</p>
+      </div>
+    </article>
+
+    <!-- Hammer Curls -->
+    <article class="ex-card" style="order:6">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=hammer+curls+dumbbell+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="hcG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d4a3fc"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="200" cy="55" r="16" fill="url(#hcG)"/>
+            <!-- Torso -->
+            <path d="M188,71 L182,150 L218,150 L212,71 Z" fill="url(#hcG)"/>
+            <!-- Both arms with neutral grip (hammer position) -->
+            <line x1="190" y1="95" x2="155" y2="135" stroke="url(#hcG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="155" y1="135" x2="155" y2="95" stroke="url(#hcG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="210" y1="95" x2="245" y2="135" stroke="url(#hcG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="245" y1="135" x2="245" y2="95" stroke="url(#hcG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Vertical dumbbells (hammer grip) -->
+            <rect x="148" y="78" width="14" height="22" fill="#ffb547" rx="2"/>
+            <rect x="144" y="74" width="22" height="6" fill="#ffb547" rx="1"/>
+            <rect x="144" y="98" width="22" height="6" fill="#ffb547" rx="1"/>
+            <rect x="238" y="78" width="14" height="22" fill="#ffb547" rx="2"/>
+            <rect x="234" y="74" width="22" height="6" fill="#ffb547" rx="1"/>
+            <rect x="234" y="98" width="22" height="6" fill="#ffb547" rx="1"/>
+            <!-- Legs -->
+            <line x1="190" y1="150" x2="185" y2="218" stroke="url(#hcG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="210" y1="150" x2="215" y2="218" stroke="url(#hcG)" stroke-width="14" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">HAMMER CURLS</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">BICEPS · FOREARM</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Hammer Curls</h3>
+        <span class="ex-name-ar">سحب المطرقة</span>
+        <div class="ex-reps">3 × 10–12</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يستهدف البايسبس والساعد معاً، يبني سماكة الذراع، ويقوي قبضة اليد بشكل ملحوظ.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <h3 class="sub-header"><span class="icon">🔥</span> Cardio <span class="sub-ar">/ كارديو</span><span class="sub-line"></span></h3>
+  <div class="cardio-box">
+    <div class="cardio-text">
+      <h4>Treadmill — Brisk Walk</h4>
+      <div class="cardio-ar">تريدميل — مشي سريع</div>
+      <p>20 minutes of steady-pace walking for recovery and extra burn</p>
+    </div>
+    <div class="cardio-time">20′</div>
+  </div>
+</section>
+
+<!-- ============== DAY 5 — FULL BODY ============== -->
+<section class="day-section day-5" id="day5">
+  <div class="day-header">
+    <div class="day-num">05</div>
+    <div class="day-info">
+      <h2>Full Body Fat Burn</h2>
+      <p class="day-arabic">حرق دهون كامل الجسم — أقوى يوم في الأسبوع</p>
+    </div>
+    <span class="day-tag">FULL BODY 🔥</span>
+  </div>
+
+  <div class="circuit-box">
+    <div style="font-family:'Anton';font-size:42px;color:#ffb547;line-height:1;text-transform:uppercase">Circuit × 4</div>
+    <div style="flex:1;min-width:200px">
+      <div style="font-family:'Anton';font-size:20px;font-weight:400;margin-bottom:4px;text-transform:uppercase">Repeat 4 Rounds</div>
+      <div style="color:var(--ink-dim);font-size:14px;font-family:'Reem Kufi'">⏱️ راحة بين الجولات: 1 دقيقة فقط — كرر الجولة 4 مرات</div>
+    </div>
+  </div>
+
+  <div class="exercises">
+
+    <!-- Jump Squats -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=jump+squats+tutorial+form" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="jsG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffd47a"/><stop offset="1" stop-color="#ffb547"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <!-- Head -->
+            <circle cx="200" cy="40" r="16" fill="url(#jsG)"/>
+            <!-- Torso (in air) -->
+            <path d="M188,56 L182,130 L218,130 L212,56 Z" fill="url(#jsG)"/>
+            <!-- Arms up -->
+            <line x1="190" y1="75" x2="155" y2="35" stroke="url(#jsG)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="210" y1="75" x2="245" y2="35" stroke="url(#jsG)" stroke-width="13" stroke-linecap="round"/>
+            <!-- Legs straight (mid jump) -->
+            <line x1="190" y1="130" x2="180" y2="200" stroke="url(#jsG)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="210" y1="130" x2="220" y2="200" stroke="url(#jsG)" stroke-width="14" stroke-linecap="round"/>
+            <!-- Floor shadow + dust -->
+            <ellipse cx="200" cy="220" rx="40" ry="4" fill="rgba(255,77,45,.3)"/>
+            <path d="M150,215 Q145,210 142,213" stroke="#ff4d2d" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M250,215 Q255,210 258,213" stroke="#ff4d2d" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Air lines -->
+            <line x1="160" y1="100" x2="145" y2="105" stroke="#ffb547" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+            <line x1="240" y1="100" x2="255" y2="105" stroke="#ffb547" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">JUMP SQUAT</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">EXPLOSIVE</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Jump Squats</h3>
+        <span class="ex-name-ar">القفز سكوات</span>
+        <div class="ex-reps">15 reps</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يحرق سعرات هائلة، يبني قوة انفجارية في الأرجل، ويرفع معدل ضربات القلب بسرعة.</p>
+      </div>
+    </article>
+
+    <!-- Push-Ups -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=push+ups+proper+form+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="pu5G" x1="0" x2="1"><stop offset="0" stop-color="#ffd47a"/><stop offset="1" stop-color="#ffb547"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <line x1="100" y1="155" x2="100" y2="200" stroke="url(#pu5G)" stroke-width="14" stroke-linecap="round"/>
+            <line x1="200" y1="155" x2="200" y2="200" stroke="url(#pu5G)" stroke-width="14" stroke-linecap="round"/>
+            <path d="M100,155 Q200,140 300,155 L320,160 L320,170 L100,165 Z" fill="url(#pu5G)"/>
+            <line x1="300" y1="160" x2="370" y2="195" stroke="url(#pu5G)" stroke-width="13" stroke-linecap="round"/>
+            <circle cx="85" cy="155" r="16" fill="url(#pu5G)"/>
+            <line x1="365" y1="195" x2="380" y2="200" stroke="url(#pu5G)" stroke-width="6" stroke-linecap="round"/>
+            <ellipse cx="100" cy="201" rx="10" ry="3" fill="rgba(0,0,0,.3)"/>
+            <ellipse cx="200" cy="201" rx="10" ry="3" fill="rgba(0,0,0,.3)"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="16" fill="rgba(255,255,255,.3)" letter-spacing="3">PUSH-UP</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">UPPER BODY</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Push-Ups</h3>
+        <span class="ex-name-ar">ضغط</span>
+        <div class="ex-reps">15 reps</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يقوي الصدر والكتف والتراي، يفعّل الكور، تمرين متكامل للجزء العلوي.</p>
+      </div>
+    </article>
+
+    <!-- Lunges -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=lunges+exercise+proper+form" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="ln5G" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffd47a"/><stop offset="1" stop-color="#ffb547"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="220" x2="380" y2="220" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <circle cx="180" cy="55" r="16" fill="url(#ln5G)"/>
+            <path d="M168,71 L162,140 L200,140 L192,71 Z" fill="url(#ln5G)"/>
+            <path d="M195,140 L260,180 L275,180 L210,140 Z" fill="url(#ln5G)"/>
+            <line x1="265" y1="180" x2="265" y2="218" stroke="url(#ln5G)" stroke-width="14" stroke-linecap="round"/>
+            <path d="M170,140 L130,200 L150,210 L185,145 Z" fill="url(#ln5G)"/>
+            <line x1="135" y1="207" x2="115" y2="218" stroke="url(#ln5G)" stroke-width="12" stroke-linecap="round"/>
+            <line x1="170" y1="100" x2="155" y2="135" stroke="url(#ln5G)" stroke-width="11" stroke-linecap="round"/>
+            <line x1="190" y1="100" x2="200" y2="135" stroke="url(#ln5G)" stroke-width="11" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="245" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">LUNGES</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">LEGS</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Lunges</h3>
+        <span class="ex-name-ar">طعنات</span>
+        <div class="ex-reps">12 لكل رجل</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يشد المؤخرة والفخذ، يقوي التوازن، ويصحح اختلال القوة بين الرجلين.</p>
+      </div>
+    </article>
+
+    <!-- Mountain Climbers -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=mountain+climbers+exercise+tutorial" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="mc5G" x1="0" x2="1"><stop offset="0" stop-color="#ffd47a"/><stop offset="1" stop-color="#ffb547"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <circle cx="80" cy="120" r="15" fill="url(#mc5G)"/>
+            <path d="M95,113 L260,130 L280,135 L280,148 L95,128 Z" fill="url(#mc5G)"/>
+            <line x1="95" y1="128" x2="95" y2="195" stroke="url(#mc5G)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="115" y1="128" x2="115" y2="195" stroke="url(#mc5G)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="280" y1="140" x2="350" y2="195" stroke="url(#mc5G)" stroke-width="13" stroke-linecap="round"/>
+            <path d="M260,140 Q220,160 180,165" stroke="url(#mc5G)" stroke-width="13" fill="none" stroke-linecap="round"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">MOUNTAIN CLIMBERS</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">CARDIO · CORE</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Mountain Climbers</h3>
+        <span class="ex-name-ar">متسلق الجبل</span>
+        <div class="ex-reps">30 ثانية</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> كارديو + قوة معاً، يحرق دهون البطن بسرعة، ويرفع اللياقة بشكل ملحوظ.</p>
+      </div>
+    </article>
+
+    <!-- Plank -->
+    <article class="ex-card">
+      <a class="ex-thumb" href="https://www.youtube.com/results?search_query=plank+exercise+proper+form" target="_blank" rel="noopener">
+        <svg class="figure" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="pl5G" x1="0" x2="1"><stop offset="0" stop-color="#ffd47a"/><stop offset="1" stop-color="#ffb547"/></linearGradient></defs>
+          <line class="ground" x1="20" y1="200" x2="380" y2="200" stroke-width="2" stroke-dasharray="4 6"/>
+          <g class="body">
+            <circle cx="80" cy="130" r="15" fill="url(#pl5G)"/>
+            <path d="M95,123 L300,118 L320,123 L320,138 L95,143 Z" fill="url(#pl5G)"/>
+            <line x1="95" y1="143" x2="95" y2="195" stroke="url(#pl5G)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="115" y1="143" x2="115" y2="195" stroke="url(#pl5G)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="95" y1="195" x2="135" y2="200" stroke="url(#pl5G)" stroke-width="11" stroke-linecap="round"/>
+            <line x1="300" y1="125" x2="365" y2="195" stroke="url(#pl5G)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="320" y1="135" x2="375" y2="195" stroke="url(#pl5G)" stroke-width="13" stroke-linecap="round" opacity=".7"/>
+          </g>
+          <text x="200" y="235" text-anchor="middle" font-family="Bebas Neue" font-size="14" fill="rgba(255,255,255,.3)" letter-spacing="3">PLANK</text>
+        </svg>
+        <div class="video-badge">VIDEO</div>
+        <div class="muscle-tag">CORE</div>
+        <div class="ex-play"><div class="ex-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </a>
+      <div class="ex-meta">
+        <h3 class="ex-name-en">Plank</h3>
+        <span class="ex-name-ar">بلانك</span>
+        <div class="ex-reps">45 ثانية</div>
+        <p class="ex-benefit"><strong>الفوائد:</strong> يقوي الكور بالكامل، يثبت الجسم، ويحسن وضعية الظهر.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <h3 class="sub-header"><span class="icon">🏃</span> Finisher <span class="sub-ar">/ بعد الـ Circuit</span><span class="sub-line"></span></h3>
+  <div class="cardio-box">
+    <div class="cardio-text">
+      <h4>Treadmill Finisher</h4>
+      <div class="cardio-ar">تريدميل ختامي</div>
+      <p>15–20 minutes to close the session and accelerate post-workout burn</p>
+    </div>
+    <div class="cardio-time">20′</div>
+  </div>
+</section>
+
+<footer>
+  <div class="quote">Discipline <span class="accent-text">Beats</span> Motivation</div>
+  <div class="quote-ar">"الانضباط أقوى من الحماس"</div>
+  <p>اضغط على أي صورة تمرين لمشاهدة فيديو توضيحي على يوتيوب • ابدأ بإحماء 5 دقائق دائماً • اشرب ماء كافي</p>
+  <p class="rest-source">أوقات الراحة مقترحات عملية مبنية على مراجعة منهجية حديثة: أكثر من 60 ثانية قد يحسن الحفاظ على حجم التدريب، ولا تظهر فائدة واضحة إضافية للتضخيم بعد 90 ثانية. <a href="https://pubmed.ncbi.nlm.nih.gov/39205815/" target="_blank" rel="noopener">المصدر العلمي</a></p>
+</footer>
+
+<aside class="rest-timer" aria-label="مؤقت الراحة" aria-hidden="true">
+  <div class="rest-timer-head">
+    <div>
+      <div class="rest-timer-label">مؤقت الراحة</div>
+      <div class="rest-timer-time" role="timer" aria-live="polite">01:00</div>
+    </div>
+    <button class="rest-timer-close" type="button" aria-label="إغلاق المؤقت">×</button>
+  </div>
+  <div class="rest-timer-track"><span class="rest-timer-fill"></span></div>
+  <div class="rest-timer-presets" aria-label="مدة الراحة">
+    <button class="timer-preset" type="button" data-seconds="30">30 ثانية</button>
+    <button class="timer-preset is-active" type="button" data-seconds="60">60 ثانية</button>
+    <button class="timer-preset" type="button" data-seconds="90">90 ثانية</button>
+  </div>
+  <button class="timer-toggle" type="button">إيقاف مؤقت</button>
+</aside>
+
+<div class="exercise-dialog" role="dialog" aria-modal="true" aria-labelledby="exercise-dialog-title" aria-hidden="true">
+  <div class="exercise-dialog-panel">
+    <div class="dialog-head">
+      <div>
+        <div class="dialog-eyebrow">تفاصيل التمرين</div>
+        <h3 class="dialog-title" id="exercise-dialog-title"></h3>
+      </div>
+      <button class="dialog-close" type="button" aria-label="إغلاق التفاصيل">×</button>
+    </div>
+    <section class="dialog-section">
+      <h4>طريقة الأداء</h4>
+      <p class="dialog-instructions"></p>
+    </section>
+    <section class="dialog-section dialog-form-grid">
+      <label>
+        <span class="field-label">الوزن المستخدم (كغ)</span>
+        <input class="dialog-input" type="number" min="0" step="0.5" inputmode="decimal" placeholder="مثال: 10">
+      </label>
+      <label>
+        <span class="field-label">ملاحظاتك</span>
+        <textarea class="dialog-notes" placeholder="سجّل مستوى الصعوبة، الأداء، أو هدف المجموعة القادمة..."></textarea>
+      </label>
+    </section>
+    <div class="save-state" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    document.body.classList.add('reveal-ready');
+    const storageKey = 'workout-completed-exercises-v1';
+    const logStorageKey = 'workout-exercise-log-v1';
+    let completed = {};
+    let exerciseLog = {};
+
+    try {
+      completed = JSON.parse(localStorage.getItem(storageKey)) || {};
+    } catch (_) {
+      completed = {};
+    }
+    try {
+      exerciseLog = JSON.parse(localStorage.getItem(logStorageKey)) || {};
+    } catch (_) {
+      exerciseLog = {};
+    }
+
+    const checkIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+    const exerciseInstructions = {
+      'Push-Ups': 'ضع يديك أوسع قليلاً من الكتفين، وثبّت جسمك بخط مستقيم. انزل بصدر متحكّم حتى يقترب من الأرض، ثم ادفع دون ترك الحوض يهبط.',
+      'Incline Push-Ups': 'ضع يديك على سطح ثابت ومرتفع، وحافظ على استقامة الجسم. اخفض صدرك نحو الحافة ثم ادفع حتى تمد الذراعين دون قفل قوي للمرفقين.',
+      'Pike Push-Ups': 'ارفع الحوض ليأخذ الجسم شكل مثلث، وانظر بين القدمين. اثنِ المرفقين وأنزل الرأس باتجاه الأرض ثم ادفع بالكتفين للأعلى.',
+      'Chair Dips': 'ثبّت الكرسي على الأرض وضع الكفين قرب الوركين. انزل عمودياً مع إبقاء الكتفين للخلف، ثم ادفع حتى تعود دون النزول أعمق من راحة كتفك.',
+      'Shoulder Taps': 'ابدأ بوضعية البلانك وباعد القدمين للثبات. المس كل كتف باليد المقابلة بالتناوب مع مقاومة دوران الحوض.',
+      'Squats': 'ثبّت القدمين بعرض الكتفين ووجّه الركبتين مع اتجاه الأصابع. ادفع الحوض للخلف والأسفل، ثم اصعد بالضغط عبر كامل القدم.',
+      'Lunges': 'خذ خطوة كافية للأمام وانزل بالركبة الخلفية نحو الأرض. حافظ على الجذع ثابتاً والركبة الأمامية باتجاه أصابع القدم، ثم ادفع للعودة.',
+      'Bulgarian Split Squat': 'ضع مشط القدم الخلفية على سطح ثابت وتقدّم بالأمامية. انزل عمودياً بتحكم ثم ادفع من القدم الأمامية مع بقاء الحوض مستقيماً.',
+      'Glute Bridge': 'استلقِ واثنِ الركبتين وثبّت القدمين. اضغط بالكعبين وارفع الحوض مع عصر عضلات المؤخرة، ثم انزل ببطء دون تقويس أسفل الظهر.',
+      'Calf Raises': 'قف بثبات وارفع الكعبين لأعلى مدى مريح. اثبت لحظة في الأعلى ثم انزل ببطء حتى تشعر بتمدد عضلة الساق.',
+      'Leg Raises': 'استلقِ وثبّت أسفل الظهر باتجاه الأرض. ارفع الساقين بتحكم ثم اخفضهما دون السماح للظهر بالتقوس.',
+      'Plank': 'ضع المرفقين تحت الكتفين وشد البطن والمؤخرة. حافظ على خط مستقيم من الرأس للكعبين وتنفس طبيعياً طوال مدة الثبات.',
+      'Mountain Climbers': 'ابدأ ببلانك قوي واسحب ركبة واحدة نحو الصدر ثم بدّل بسرعة. أبقِ الكتفين فوق اليدين والحوض ثابتاً قدر الإمكان.',
+      'Russian Twists': 'اجلس مع ميل خفيف للخلف وظهر محايد. دوّر القفص الصدري من جهة لأخرى بتحكم بدلاً من تحريك الذراعين وحدهما.',
+      'Bicycle Crunch': 'قرّب الكتف نحو الركبة المقابلة مع مد الساق الأخرى. بدّل الجانبين ببطء وحافظ على أسفل الظهر قريباً من الأرض.',
+      'One-Arm Dumbbell Row': 'ثبّت اليد والركبة المقابلتين على سطح ثابت وحافظ على ظهر محايد. اسحب الدمبل نحو الورك ثم اخفضه ببطء دون تدوير الجذع.',
+      'Dumbbell Pullover': 'استلقِ بثبات وامسك الدمبل فوق الصدر بكلتا اليدين. اخفضه خلف الرأس بقوس متحكّم ومرفقين مثنيين قليلاً، ثم اسحبه للعودة.',
+      'Superman Hold': 'استلقِ على البطن ومد الذراعين والساقين. ارفعهما مسافة مريحة مع شد المؤخرة والظهر، وتجنب رفع الرقبة بقوة.',
+      'Reverse Snow Angels': 'استلقِ على البطن وارفع اليدين قليلاً عن الأرض. حرّك الذراعين بقوس من فوق الرأس نحو الوركين ببطء مع إبقاء الكتفين بعيدين عن الأذنين.',
+      'Towel Rows': 'استخدم نقطة تثبيت قوية وآمنة فقط، وامسك المنشفة بكلتا اليدين. مِل للخلف بجسم مستقيم واسحب صدرك للأمام مع ضم لوحي الكتف.',
+      'Bicep Curls': 'ثبّت المرفقين بجانب الجسم وارفع الدمبلين دون تأرجح. اعصر البايسبس في الأعلى ثم اخفض الوزن ببطء حتى تمد الذراع.',
+      'Hammer Curls': 'امسك الدمبلين براحتين متقابلتين وثبّت المرفقين. ارفع بتحكم مع بقاء القبضة محايدة ثم اخفض الوزن ببطء.',
+      'Jump Squats': 'انزل إلى سكوات مريح ثم اقفز بقوة. اهبط بهدوء على منتصف القدم واثنِ الركبتين مباشرة لامتصاص الصدمة.'
+    };
+    const compoundExercises = new Set([
+      'Push-Ups', 'Incline Push-Ups', 'Pike Push-Ups', 'Chair Dips', 'Squats', 'Lunges',
+      'Bulgarian Split Squat', 'One-Arm Dumbbell Row', 'Dumbbell Pullover', 'Towel Rows'
+    ]);
+    const conditioningExercises = new Set(['Mountain Climbers', 'Jump Squats']);
+
+    const getRestRecommendation = (dayId, exerciseName) => {
+      if (dayId === 'day5') {
+        return conditioningExercises.has(exerciseName)
+          ? { seconds: 30, reason: 'دائرة كارديو؛ راحة قصيرة تحافظ على النبض.' }
+          : { seconds: 60, reason: 'ضمن دائرة؛ وقت كافٍ لاستعادة الأداء دون فقدان الإيقاع.' };
+      }
+      if (compoundExercises.has(exerciseName)) {
+        return { seconds: 90, reason: 'تمرين مركّب؛ راحة أطول تحافظ على جودة التكرارات.' };
+      }
+      if (conditioningExercises.has(exerciseName)) {
+        return { seconds: 45, reason: 'تمرين لياقة؛ راحة متوسطة تحافظ على شدة الجهد.' };
+      }
+      return { seconds: 60, reason: 'مناسب لتمارين العزل والكور مع الحفاظ على جودة الأداء.' };
+    };
+    const timer = document.querySelector('.rest-timer');
+    const timerTime = timer.querySelector('.rest-timer-time');
+    const timerFill = timer.querySelector('.rest-timer-fill');
+    const timerToggle = timer.querySelector('.timer-toggle');
+    const presetButtons = [...timer.querySelectorAll('.timer-preset')];
+    let timerInterval;
+    let timerDuration = 60;
+    let timerRemaining = 60;
+    let timerRunning = false;
+    const dialog = document.querySelector('.exercise-dialog');
+    const dialogTitle = dialog.querySelector('.dialog-title');
+    const dialogInstructions = dialog.querySelector('.dialog-instructions');
+    const weightInput = dialog.querySelector('.dialog-input');
+    const notesInput = dialog.querySelector('.dialog-notes');
+    const saveState = dialog.querySelector('.save-state');
+    let activeExerciseId = '';
+    let dialogTrigger = null;
+    let saveStateTimeout;
+
+    const closeDialog = () => {
+      dialog.classList.remove('is-open');
+      dialog.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      dialogTrigger?.focus();
+    };
+
+    const openDialog = (exerciseId, exerciseName, trigger) => {
+      activeExerciseId = exerciseId;
+      dialogTrigger = trigger;
+      const saved = exerciseLog[exerciseId] || {};
+      dialogTitle.textContent = exerciseName;
+      dialogInstructions.textContent = exerciseInstructions[exerciseName] || 'نفّذ الحركة بتحكم، حافظ على وضعية جسم ثابتة، وأوقف المجموعة إذا لم تعد قادراً على الحفاظ على الأداء الصحيح.';
+      weightInput.value = saved.weight ?? '';
+      notesInput.value = saved.notes ?? '';
+      saveState.textContent = '';
+      dialog.classList.add('is-open');
+      dialog.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      dialog.querySelector('.dialog-close').focus();
+    };
+
+    const saveExerciseLog = () => {
+      if (!activeExerciseId) return;
+      exerciseLog[activeExerciseId] = { weight: weightInput.value, notes: notesInput.value };
+      try {
+        localStorage.setItem(logStorageKey, JSON.stringify(exerciseLog));
+        saveState.textContent = 'تم الحفظ تلقائياً';
+        clearTimeout(saveStateTimeout);
+        saveStateTimeout = setTimeout(() => { saveState.textContent = ''; }, 1600);
+      } catch (_) {
+        saveState.textContent = 'تعذّر الحفظ في المتصفح';
+      }
+    };
+
+    weightInput.addEventListener('input', saveExerciseLog);
+    notesInput.addEventListener('input', saveExerciseLog);
+    dialog.querySelector('.dialog-close').addEventListener('click', closeDialog);
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) closeDialog(); });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && dialog.classList.contains('is-open')) closeDialog();
+    });
+
+    const renderTimer = () => {
+      const minutes = Math.floor(timerRemaining / 60);
+      const seconds = timerRemaining % 60;
+      timerTime.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      timerFill.style.width = `${(timerRemaining / timerDuration) * 100}%`;
+    };
+
+    const soundAlert = () => {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const context = new AudioContext();
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.frequency.value = 720;
+        gain.gain.setValueAtTime(.12, context.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .45);
+        oscillator.connect(gain).connect(context.destination);
+        oscillator.start();
+        oscillator.stop(context.currentTime + .45);
+      } catch (_) {}
+    };
+
+    const stopTimer = () => {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerToggle.textContent = timerRemaining === 0 ? 'إعادة المؤقت' : 'استكمال المؤقت';
+    };
+
+    const startTimer = (seconds = timerRemaining) => {
+      clearInterval(timerInterval);
+      timerDuration = seconds;
+      timerRemaining = seconds;
+      timerRunning = true;
+      timer.classList.remove('is-finished');
+      timer.classList.add('is-open');
+      timer.setAttribute('aria-hidden', 'false');
+      timerToggle.textContent = 'إيقاف مؤقت';
+      presetButtons.forEach((button) => button.classList.toggle('is-active', Number(button.dataset.seconds) === seconds));
+      renderTimer();
+      timerInterval = setInterval(() => {
+        timerRemaining -= 1;
+        renderTimer();
+        if (timerRemaining <= 0) {
+          stopTimer();
+          timer.classList.add('is-finished');
+          timerToggle.textContent = 'ابدأ مرة أخرى';
+          soundAlert();
+        }
+      }, 1000);
+    };
+
+    presetButtons.forEach((button) => {
+      button.addEventListener('click', () => startTimer(Number(button.dataset.seconds)));
+    });
+    timerToggle.addEventListener('click', () => {
+      if (timerRunning) {
+        stopTimer();
+      } else {
+        startTimer(timerRemaining || timerDuration);
+      }
+    });
+    timer.querySelector('.rest-timer-close').addEventListener('click', () => {
+      stopTimer();
+      timer.classList.remove('is-open');
+      timer.setAttribute('aria-hidden', 'true');
+    });
+
+    document.querySelectorAll('.day-section').forEach((day) => {
+      const cards = [...day.querySelectorAll('.ex-card')];
+      const dayInfo = day.querySelector('.day-info');
+      if (!cards.length || !dayInfo) return;
+
+      const progress = document.createElement('div');
+      progress.className = 'day-progress';
+      progress.innerHTML = `
+        <div class="day-progress-copy">
+          <span>تقدّم اليوم</span>
+          <strong><span class="day-progress-count">0</span> / ${cards.length}</strong>
+        </div>
+        <div class="day-progress-track" role="progressbar" aria-label="تقدّم تمارين اليوم" aria-valuemin="0" aria-valuemax="${cards.length}" aria-valuenow="0">
+          <span class="day-progress-fill"></span>
+        </div>`;
+      dayInfo.appendChild(progress);
+
+      const updateProgress = () => {
+        const done = cards.filter((card) => card.classList.contains('is-complete')).length;
+        progress.querySelector('.day-progress-count').textContent = done;
+        progress.querySelector('.day-progress-fill').style.width = `${(done / cards.length) * 100}%`;
+        progress.querySelector('.day-progress-track').setAttribute('aria-valuenow', done);
+      };
+
+      cards.forEach((card, index) => {
+        const meta = card.querySelector('.ex-meta');
+        const exerciseName = card.querySelector('.ex-name-en')?.textContent.trim() || `exercise-${index + 1}`;
+        const exerciseId = `${day.id}:${exerciseName}`;
+        const recommendation = getRestRecommendation(day.id, exerciseName);
+        const reps = card.querySelector('.ex-reps');
+        const restNote = document.createElement('p');
+        restNote.className = 'rest-note';
+        restNote.innerHTML = `<strong>الراحة المقترحة: ${recommendation.seconds} ثانية</strong> · ${recommendation.reason}`;
+        reps.insertAdjacentElement('afterend', restNote);
+        const detailsButton = document.createElement('button');
+        detailsButton.className = 'details-btn';
+        detailsButton.type = 'button';
+        detailsButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>تفاصيل التمرين والسجل</span>';
+        detailsButton.addEventListener('click', () => openDialog(exerciseId, exerciseName, detailsButton));
+        const button = document.createElement('button');
+        button.className = 'complete-btn';
+        button.type = 'button';
+        const restButton = document.createElement('button');
+        restButton.className = 'rest-btn';
+        restButton.type = 'button';
+        restButton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg><span>أنهيت مجموعة · راحة ${recommendation.seconds}ث</span>`;
+        restButton.addEventListener('click', () => startTimer(recommendation.seconds));
+
+        const setComplete = (isComplete) => {
+          card.classList.toggle('is-complete', isComplete);
+          button.setAttribute('aria-pressed', String(isComplete));
+          button.innerHTML = `${checkIcon}<span>${isComplete ? 'تم الإنجاز' : 'تحديد كمُنجز'}</span>`;
+          completed[exerciseId] = isComplete;
+        };
+
+        setComplete(Boolean(completed[exerciseId]));
+        button.addEventListener('click', () => {
+          const isNowComplete = !card.classList.contains('is-complete');
+          setComplete(isNowComplete);
+          try {
+            localStorage.setItem(storageKey, JSON.stringify(completed));
+          } catch (_) {}
+          updateProgress();
+        });
+
+        meta.appendChild(detailsButton);
+        meta.appendChild(restButton);
+        meta.appendChild(button);
+      });
+
+      updateProgress();
+    });
+
+    const navLinks = [...document.querySelectorAll('.day-pill')];
+    const daySections = [...document.querySelectorAll('.day-section')];
+    const setActiveDay = (dayId) => {
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute('href') === `#${dayId}`;
+        link.classList.toggle('is-active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'true');
+          if (window.innerWidth > 640) link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    if ('IntersectionObserver' in window) {
+      const dayObserver = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveDay(visible.target.id);
+      }, { rootMargin: '-20% 0px -55% 0px', threshold: [0, .15, .35] });
+      daySections.forEach((section) => dayObserver.observe(section));
+
+      const cardObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+      document.querySelectorAll('.ex-card').forEach((card, index) => {
+        card.style.transitionDelay = `${Math.min(index % 4, 3) * 45}ms`;
+        cardObserver.observe(card);
+      });
+    } else {
+      document.querySelectorAll('.ex-card').forEach((card) => card.classList.add('is-visible'));
+    }
+
+    navLinks.forEach((link) => link.addEventListener('click', () => setActiveDay(link.hash.slice(1))));
+  })();
+</script>
+
+</body>
+</html>
