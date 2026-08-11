@@ -272,7 +272,6 @@
       link.classList.toggle('is-active', isActive);
       if (isActive) {
         link.setAttribute('aria-current', 'true');
-        if (window.innerWidth > 640) link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       } else {
         link.removeAttribute('aria-current');
       }
@@ -305,4 +304,3 @@
 
   navLinks.forEach((link) => link.addEventListener('click', () => setActiveDay(link.hash.slice(1))));
 })();
-
