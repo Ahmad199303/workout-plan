@@ -2,8 +2,14 @@
   document.body.classList.add('reveal-ready');
   const storageKey = 'workout-completed-exercises-v1';
   const logStorageKey = 'workout-exercise-log-v1';
+  const pendingStorageKey = 'workout-pending-sync-v1';
   let completed = {};
   let exerciseLog = {};
+  let pendingSync = [];
+  let db = null;
+  let currentUserId = null;
+  let logSyncTimeout;
+  const exerciseViews = new Map();
 
   try {
     completed = JSON.parse(localStorage.getItem(storageKey)) || {};
@@ -15,6 +21,110 @@
   } catch (_) {
     exerciseLog = {};
   }
+  try {
+    pendingSync = JSON.parse(localStorage.getItem(pendingStorageKey)) || [];
+  } catch (_) {
+    pendingSync = [];
+  }
+
+  const syncStatus = document.querySelector('.sync-status');
+  const setSyncStatus = (state, message) => {
+    if (!syncStatus) return;
+    syncStatus.dataset.state = state;
+    syncStatus.querySelector('.sync-status-text').textContent = message;
+  };
+  const persistPending = () => {
+    try { localStorage.setItem(pendingStorageKey, JSON.stringify(pendingSync)); } catch (_) {}
+  };
+  const markPending = (exerciseId) => {
+    if (!pendingSync.includes(exerciseId)) pendingSync.push(exerciseId);
+    persistPending();
+  };
+  const rowForExercise = (exerciseId) => {
+    const log = exerciseLog[exerciseId] || {};
+    const parsedWeight = log.weight === '' || log.weight == null ? null : Number(log.weight);
+    return {
+      user_id: currentUserId,
+      exercise_id: exerciseId,
+      completed: Boolean(completed[exerciseId]),
+      weight_kg: Number.isFinite(parsedWeight) ? parsedWeight : null,
+      notes: log.notes?.trim() || null,
+      updated_at: new Date().toISOString()
+    };
+  };
+  const syncExercise = async (exerciseId) => {
+    markPending(exerciseId);
+    if (!db || !currentUserId) {
+      setSyncStatus('offline', 'محفوظ محليًا');
+      return false;
+    }
+    const { error } = await db.from('workout_progress').upsert(rowForExercise(exerciseId), {
+      onConflict: 'user_id,exercise_id'
+    });
+    if (error) {
+      console.error('Workout sync failed:', error.message);
+      setSyncStatus('offline', 'بانتظار المزامنة');
+      return false;
+    }
+    pendingSync = pendingSync.filter((id) => id !== exerciseId);
+    persistPending();
+    setSyncStatus('online', 'تمت المزامنة');
+    return true;
+  };
+  const renderStoredProgress = () => {
+    const updateDays = new Set();
+    exerciseViews.forEach((view, exerciseId) => {
+      view.setComplete(Boolean(completed[exerciseId]));
+      updateDays.add(view.updateProgress);
+    });
+    updateDays.forEach((update) => update());
+  };
+  const connectDatabase = async () => {
+    const config = window.WORKOUT_SUPABASE_CONFIG;
+    if (!window.supabase?.createClient || !config?.url || !config?.publishableKey) {
+      setSyncStatus('offline', 'حفظ محلي');
+      return;
+    }
+    try {
+      db = window.supabase.createClient(config.url, config.publishableKey);
+      let { data: { session } } = await db.auth.getSession();
+      if (!session) {
+        const { data, error } = await db.auth.signInAnonymously();
+        if (error) throw error;
+        session = data.session;
+      }
+      currentUserId = session.user.id;
+
+      for (const exerciseId of [...pendingSync]) await syncExercise(exerciseId);
+      const { data: rows, error } = await db
+        .from('workout_progress')
+        .select('exercise_id, completed, weight_kg, notes');
+      if (error) throw error;
+
+      if (rows.length) {
+        rows.forEach((row) => {
+          completed[row.exercise_id] = row.completed;
+          exerciseLog[row.exercise_id] = {
+            weight: row.weight_kg ?? '',
+            notes: row.notes ?? ''
+          };
+        });
+        localStorage.setItem(storageKey, JSON.stringify(completed));
+        localStorage.setItem(logStorageKey, JSON.stringify(exerciseLog));
+        renderStoredProgress();
+      } else {
+        const localIds = new Set([...Object.keys(completed), ...Object.keys(exerciseLog)]);
+        for (const exerciseId of localIds) await syncExercise(exerciseId);
+      }
+      setSyncStatus('online', 'متصل بقاعدة البيانات');
+    } catch (error) {
+      console.error('Supabase connection failed:', error.message);
+      db = null;
+      currentUserId = null;
+      const anonymousDisabled = error.code === 'anonymous_provider_disabled';
+      setSyncStatus('offline', anonymousDisabled ? 'فعّل المزامنة' : 'حفظ محلي');
+    }
+  };
 
   const checkIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
   const exerciseInstructions = {
@@ -108,7 +218,14 @@
     exerciseLog[activeExerciseId] = { weight: weightInput.value, notes: notesInput.value };
     try {
       localStorage.setItem(logStorageKey, JSON.stringify(exerciseLog));
-      saveState.textContent = 'تم الحفظ تلقائياً';
+      saveState.textContent = 'تم الحفظ محليًا، جاري المزامنة...';
+      markPending(activeExerciseId);
+      clearTimeout(logSyncTimeout);
+      const exerciseIdToSync = activeExerciseId;
+      logSyncTimeout = setTimeout(async () => {
+        const synced = await syncExercise(exerciseIdToSync);
+        if (activeExerciseId === exerciseIdToSync && synced) saveState.textContent = 'تم الحفظ في قاعدة البيانات';
+      }, 650);
       clearTimeout(saveStateTimeout);
       saveStateTimeout = setTimeout(() => { saveState.textContent = ''; }, 1600);
     } catch (_) {
@@ -253,12 +370,14 @@
         try {
           localStorage.setItem(storageKey, JSON.stringify(completed));
         } catch (_) {}
+        syncExercise(exerciseId);
         updateProgress();
       });
 
       meta.appendChild(detailsButton);
       meta.appendChild(restButton);
       meta.appendChild(button);
+      exerciseViews.set(exerciseId, { setComplete, updateProgress });
     });
 
     updateProgress();
@@ -303,4 +422,5 @@
   }
 
   navLinks.forEach((link) => link.addEventListener('click', () => setActiveDay(link.hash.slice(1))));
+  connectDatabase();
 })();

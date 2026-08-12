@@ -11,12 +11,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="guide-page">
-  <header class="guide-hero">
-    <nav class="guide-topbar" aria-label="التنقل الرئيسي">
-      <a class="back-link" href="index.html"><span aria-hidden="true">→</span> خطة التمارين</a>
-      <span class="guide-brand">WORKOUT / GUIDE</span>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="صفحات الموقع">
+      <a class="site-brand" href="index.html" aria-label="Workout Plan — الصفحة الرئيسية">
+        <span class="site-brand-mark" aria-hidden="true">W</span>
+        <span class="site-brand-copy"><strong>WORKOUT</strong><small>PLAN</small></span>
+      </a>
+      <div class="page-tabs" role="list">
+        <a class="page-tab" href="index.html" role="listitem">
+          <span class="page-tab-index">01</span>
+          <span>خطة التمارين</span>
+        </a>
+        <a class="page-tab is-active" href="guide.html" aria-current="page" role="listitem">
+          <span class="page-tab-index">02</span>
+          <span>الدليل والتوصيات</span>
+        </a>
+      </div>
     </nav>
+  </header>
 
+  <header class="guide-hero">
     <div class="guide-hero-content">
       <span class="guide-kicker">TRAIN SMARTER • MOVE BETTER</span>
       <h1>دليل تمرين<br><span>أذكى وأقوى</span></h1>

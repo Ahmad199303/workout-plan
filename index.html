@@ -11,6 +11,29 @@
 </head>
 <body>
 
+<header class="site-header">
+  <nav class="site-nav" aria-label="صفحات الموقع">
+    <a class="site-brand" href="index.html" aria-label="Workout Plan — الصفحة الرئيسية">
+      <span class="site-brand-mark" aria-hidden="true">W</span>
+      <span class="site-brand-copy"><strong>WORKOUT</strong><small>PLAN</small></span>
+    </a>
+    <span class="sync-status" data-state="connecting" role="status" aria-live="polite">
+      <span class="sync-status-dot" aria-hidden="true"></span>
+      <span class="sync-status-text">جاري الاتصال</span>
+    </span>
+    <div class="page-tabs" role="list">
+      <a class="page-tab is-active" href="index.html" aria-current="page" role="listitem">
+        <span class="page-tab-index">01</span>
+        <span>خطة التمارين</span>
+      </a>
+      <a class="page-tab" href="guide.html" role="listitem">
+        <span class="page-tab-index">02</span>
+        <span>الدليل والتوصيات</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
 <section class="hero">
   <div class="hero-grid">
     <div>
@@ -21,12 +44,6 @@
         <div><div class="stat-num">5</div><div class="stat-label">Days</div></div>
         <div><div class="stat-num">25+</div><div class="stat-label">Exercises</div></div>
         <div><div class="stat-num">60′</div><div class="stat-label">Per Session</div></div>
-      </div>
-      <div class="hero-actions">
-        <a class="guide-link" href="guide.html">
-          <span>دليل التمرين والتوصيات</span>
-          <span class="guide-link-arrow" aria-hidden="true">↗</span>
-        </a>
       </div>
     </div>
     <div class="hero-side">WORKOUT • PLAN • 2026</div>
@@ -1179,6 +1196,8 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.9/dist/umd/supabase.min.js"></script>
+<script src="supabase-config.js"></script>
 <script src="script.js"></script>
 
 </body>
